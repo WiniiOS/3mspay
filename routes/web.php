@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,6 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('index');
-Route::get('/Register', [PostController::class, 'register'])->name('register');
-Route::get('/Form', [PostController::class, 'form'])->name('form');
+Route::get('/', [UserController::class, 'index'])->name('index');
+Route::get('/Register', [UserController::class, 'register'])->name('register');
+Route::get('/Form', [TicketController::class, 'form'])->name('form');
