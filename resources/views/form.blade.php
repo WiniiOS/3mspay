@@ -31,8 +31,8 @@
                                         <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">
                                         <span>Informations</span>
                                         </button>
-                                        <button class="multisteps-form__progress-btn" type="button" title="Address">Coordonnees</button>
-                                        <button class="multisteps-form__progress-btn" type="button" title="Socials">Mode de payement</button>
+                                        <button class="multisteps-form__progress-btn" type="button" title="Address">Coordonnées</button>
+                                        <button class="multisteps-form__progress-btn" type="button" title="Socials">Mode de paiement</button>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                             <form class="multisteps-form__form mb-8"> 
                                 <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                     <h5 class="font-weight-bolder mb-0">Informations personelles</h5>
-                                    <p class="mb-0 text-sm">Entrer vos informations</p>
+                                    <p class="mb-0 text-sm">Entrez vos informations</p>
                                     <div class="multisteps-form__content">
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
@@ -52,7 +52,7 @@
                                             <input class="multisteps-form__input form-control" type="text" placeholder="ex. Michael" />
                                             </div>
                                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                            <label>Prenom</label>
+                                            <label>Prénom</label>
                                             <input class="multisteps-form__input form-control" type="text" placeholder="ex. Ange" />
                                             </div>
                                         </div>
@@ -77,13 +77,13 @@
                                     <div class="multisteps-form__content">
                                         <div class="row mt-3">
                                         <div class="col">
-                                        <label>Nationalite </label>
+                                        <label>Nationalité </label>
                                         <input class="multisteps-form__input form-control" type="text" placeholder="ex. Camerounaise" />
                                         </div>
                                         </div>
                                         <div class="row mt-3">
                                         <div class="col">
-                                        <label>Telephone</label>
+                                        <label>Téléphone</label>
                                         <input class="multisteps-form__input form-control" type="text" placeholder="ex. 655387654" />
                                         </div>
                                         </div>
@@ -97,7 +97,7 @@
                                         
                                         </div>
                                         <div class="button-row d-flex mt-4">
-                                        <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Precedent</button>
+                                        <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Précédent</button>
                                         <button class="btn bg-gradient-success ms-auto mb-0 js-btn-next" type="button" title="Next">Suivant</button>
                                         </div>
                                     </div>
@@ -106,8 +106,8 @@
                                 <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
                                     <div class="row text-center">
                                         <div class="col-10 mx-auto">
-                                        <h5 class="font-weight-normal">Que comment ça fonctionne ? </h5>
-                                        <p>Selectionnez l'un des modes de payement qui s'affiche</p>
+                                        <h5 class="font-weight-normal">Comment ça fonctionne ? </h5>
+                                        <p>Selectionnez l'un des modes de payement qui s'affiche </p>
                                         </div>
                                     </div>
                                     <div class="multisteps-form__content">
