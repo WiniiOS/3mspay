@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('ticket_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('ticket_id')->constrained();
             $table->integer('amount')->default('30000');
             $table->enum('type', ['orange_money', 'momo','eu','credit_card']);
             $table->timestamps();

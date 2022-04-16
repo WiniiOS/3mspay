@@ -13,7 +13,7 @@
     <link href=" assets/css/nucleo-svg.css " rel="stylesheet" />
 
     <link id="pagestyle" href="{{ url('assets/css/argon-dashboard.min790f.css?v=2.0.1') }}" rel="stylesheet" />
-    <title>3MS</title>
+    <title>3MSPay</title>
 </head>
 <body>
 

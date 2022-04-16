@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Payment;
+use App\Models\Ticket;
+use App\Models\Log;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,4 +45,17 @@ class User extends Authenticatable
     // protected $casts = [
     //     'email_verified_at' => 'datetime',
     // ];
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
+
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function logs(){
+        return $this->hasMany(Log::class);
+    }
+
 }

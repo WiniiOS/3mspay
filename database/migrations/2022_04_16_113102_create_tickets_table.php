@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('reference');
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->enum('status', ['unused', 'used'])->default('unused');
             $table->timestamps();
         });
