@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    public function form(Request $request){
+    public function form(){
         return view('form');
+    }
+
+    public function save(Request $request){
+
+       
+
     }
     
 }

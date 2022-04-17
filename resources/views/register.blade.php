@@ -5,7 +5,7 @@
         <p class="mb-0 pt-2">Entrer vos information pour vous inscrire :</p>
             </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form action="{{ route('users.signup') }}" method="post" >
                         <div class="mb-3">
                         <input type="text" class="form-control form-control-lg" name="Regis_login" placeholder="CNI/Passport" aria-label="Email">
                         </div>
@@ -13,13 +13,13 @@
                         <input type="password" class="form-control form-control-lg" name="Regis_password" placeholder="Mot de passe" aria-label="Password">
                         </div>
                         <div class="mb-3">
-                        <input type="password" class="form-control form-control-lg" name="Con_password" placeholder="Confirmer le mot de passe" aria-label="Password">
+                        <input type="re_password" class="form-control form-control-lg" name="Con_password" placeholder="Confirmer le mot de passe" aria-label="Password">
                         </div>
                         <div class="form-check form-switch">
                             
                         </div>
                         <div class="text-center">
-                        <button type="submit" name="saveE" class="btn btn-lg btn-success btn-lg w-100 mt-4 mb-0">Enregistrer</button>
+                        <button type="submit" name="save" class="btn btn-lg btn-success btn-lg w-100 mt-4 mb-0">Enregistrer</button>
                         </div>
                     </form>
                 </div>
