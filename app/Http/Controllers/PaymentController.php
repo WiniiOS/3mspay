@@ -24,13 +24,23 @@ class PaymentController extends Controller
     }
 
     // fonction pour récupèrer tous les paiements
-    public function get_all()
+    public function all()
     {
         // On recupere tous les users en base de donnée
         $payments = Payment::all();
 
         return view('payments',[
             'payments' => $payments
+        ]);
+
+    }
+
+    public function one($id)
+    {
+        // On recupere tous les users en base de donnée
+        $payment = Payment::findOrFail($id);
+        return view('payments',[
+            'payment' => $payment
         ]);
 
     }

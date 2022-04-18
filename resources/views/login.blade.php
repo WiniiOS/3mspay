@@ -1,10 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-            <p class="mb-0 pt-2">Entrer vos information pour vous connecter :</p>
+            <p class="mb-0 pt-2">Entrez vos information pour vous connecter :</p>
             </div>
                 <div class="card-body">
                     <form action="{{ route('signin') }}" method="post">
+                        @csrf
                         <div class="mb-3">
                         <input type="text" class="form-control form-control-lg" name="cni_pass" placeholder="CNI/Passport" aria-label="Email">
                         </div>
@@ -22,7 +23,7 @@
 
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                     <p class="mb-4 text-sm mx-auto">
-                    Vous n etes pas encore inscrit?
+                    Vous n'etes pas encore inscrit?
                     <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Inscrivez-vous</a>
                     </p>
                 </div>

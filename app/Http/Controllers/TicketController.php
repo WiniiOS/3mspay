@@ -23,6 +23,27 @@ class TicketController extends Controller
         ]);
 
         dd('Ticket created succesfully');
+    }
+
+    // fonction pour récupèrer tous les paiements
+    public function all()
+    {
+        // On recupere tous les users en base de donnée
+        $tickets = Ticket::all();
+
+        return view('payments',[
+            'tickets' => $tickets
+        ]);
+
+    }
+
+    public function one($id)
+    {
+        // On recupere tous les users en base de donnée
+        $ticket = Ticket::findOrFail($id);
+        return view('payments',[
+            'ticket' => $ticket
+        ]);
 
     }
     

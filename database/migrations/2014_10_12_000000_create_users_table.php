@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('lastname')->nullable();
             $table->string('email')->unique()->nullable();
             $table->date('birth_day')->nullable();
-            $table->date('birthplace')->nullable();
-            $table->date('nationality')->nullable();
+            $table->string('birthplace')->nullable();
+            $table->string('nationality')->nullable();
             $table->string('password');
             $table->enum('type_user', ['admin', 'patient'])->default('patient');
             $table->integer('telephone')->nullable();

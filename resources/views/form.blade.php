@@ -42,6 +42,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-8 m-auto">
                             <form method='post' action="{{ route('ticket.save') }}" class="multisteps-form__form mb-8"> 
+                                @csrf
                                 <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                     <h5 class="font-weight-bolder mb-0">Informations personelles</h5>
                                     <p class="mb-0 text-sm">Entrez vos informations</p>

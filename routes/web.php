@@ -16,8 +16,16 @@ use App\Http\Controllers\TicketController;
 */
 
 Route::get('/', [UserController::class, 'index'])->name('login');
+
 Route::post('/', [UserController::class, 'singin'])->name('signin');
+
 Route::get('/Register', [UserController::class, 'register'])->name('register');
-Route::post('/Register', [UserController::class, 'sign_up'])->name('users.signup');
+
 Route::get('/Form', [TicketController::class, 'form'])->name('form');
+
+Route::post('/Register', [UserController::class, 'sign_up'])->name('signup');
+
 Route::post('/Form', [TicketController::class, 'save'])->name('ticket.save');
+
+Route::get('/Users', [UserController::class, 'all_users']);
+

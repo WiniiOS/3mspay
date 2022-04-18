@@ -18,23 +18,42 @@ class UserController extends Controller
 
     public function singin(Request $request){
 
-        dd('Login succesfully');
+        //on check si le user existe et on le redirige
+        $cni_pass = $request->cni_pass;
+        $sha1password = sha1($request->password);
+        
+        // dd($cni_pass);
+        
+        // recupere les données du user
+        // $user = $this->get_cnipass($cni_pass);
+
+        // if (count($user) > 0) {
+        //     if ($user->password == $sha1password) {
+        //         // on crée une variable de session & on connecte l'utilisateur
+        //         return redirect('/Form');
+        //     }
+        // }else{
+        //     return redirect('/');
+        // }
+
+        return redirect('/Form');
 
     }
 
     // Fonction qui récupère un user spécifique
-    public function get_one($id)
+    public function get_cnipass($cni_pass)
     {
-        $user = User::findOrFail($id);
+        $user = User::where('cni','=',$cni_pass)->firstOrFail();
+        // die and dub
+        dd($post);
 
-        return view('users',[
-            'user' => $user
-        ]);
-
+        return $user;
     }
 
+    
+
     // fonction pour récupèrer tous les users
-    public function get_all_users()
+    public function all_users()
     {
         // On recupere tous les users en base de donnée
         $users = User::all();
@@ -43,6 +62,13 @@ class UserController extends Controller
             'users' => $users
         ]);
 
+    }
+
+    // Fonction qui récupère un user spécifique
+    public function one($id)
+    {
+        $user = User::findOrFail($id);
+        return $user;
     }
 
     // Fonction qui récupère 10 users
@@ -66,6 +92,26 @@ class UserController extends Controller
             'telephone' => 658682586
         ]);
         return 'Utilisateur édité avec succès';
+
+    }
+
+    // Fonction qui met à jour les données d'un user
+    public function update_user_at_fisrt_payment($id,$telephone,$type_user){
+
+        $user = User::find($id);
+        // $user = User::where('id', $id )->get();
+        
+        $user->update([
+            'telephone' => $telephone,
+            'type_user' => $type_user
+        ]);
+
+        // $user->toQuery()->update([
+        //     'telephone' => $telephone,
+        //     'type_user' => $type_user
+        // ]);
+
+        dd('Utilisateur édité avec succès');
 
     }
 
@@ -99,12 +145,17 @@ class UserController extends Controller
         // dd($request);
 
         User::create([
-            'password' => $request->password,
-            'cni' => $request->Regis_login,
-            'passeport' => $request->Regis_login
+            'password' => sha1($request->password),
+            'cni' => $request->cni,
+            'passeport' => $request->passeport
         ]);
 
-        return 'Sign up created succesfully';
+        // $message = 'Sign up created succesfully';
+        $result = true;
+
+        if ($result) {
+            return redirect('/');
+        }
 
     }
 
@@ -116,6 +167,5 @@ class UserController extends Controller
         return 'User deleted succesfully';
 
     }
-
 
 }
