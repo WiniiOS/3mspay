@@ -11,13 +11,10 @@ class LogController extends Controller
     public function save(Request $request)
     {
         //on crée un enregistrement de notre Paiement en BD
-
         Log::create([
             'user_id' => $request->user_id,
             'action_type' => $request->action_type
         ]);
-
-        dd('Log created succesfully');
 
     }
 }

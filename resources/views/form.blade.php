@@ -88,15 +88,7 @@
                                         <input class="multisteps-form__input form-control" type="text" placeholder="ex. 655387654" />
                                         </div>
                                         </div>
-                                        <div class="col-12 col-sm-6">
-                                        <label>Pièce d'identité</label>
-                                        <select class="multisteps-form__select form-control">
-                                        <option selected="selected">...</option>
-                                        <option value="1">CNI</option>
-                                        <option value="2">Passport</option>
-                                        </select>
-                                        
-                                        </div>
+                                       
                                         <div class="button-row d-flex mt-4">
                                         <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Précédent</button>
                                         <button class="btn bg-gradient-success ms-auto mb-0 js-btn-next" type="button" title="Next">Suivant</button>
