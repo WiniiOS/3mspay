@@ -5,7 +5,7 @@
         <p class="mb-0 pt-2">Entrer vos information pour vous inscrire :</p>
             </div>
                 <div class="card-body">
-                    <form action="{{ route('users.signup') }}" method="post" >
+                    <form method="post" action="{{ route('users.signup') }}" >
                         <div class="mb-3">
                         <input type="text" class="form-control form-control-lg" name="Regis_login" placeholder="CNI/Passport" aria-label="Email">
                         </div>
@@ -13,7 +13,7 @@
                         <input type="password" class="form-control form-control-lg" name="Regis_password" placeholder="Mot de passe" aria-label="Password">
                         </div>
                         <div class="mb-3">
-                        <input type="re_password" class="form-control form-control-lg" name="Con_password" placeholder="Confirmer le mot de passe" aria-label="Password">
+                        <input type="password" class="form-control form-control-lg" name="Con_password" placeholder="Confirmer le mot de passe" aria-label="Password">
                         </div>
                         <div class="form-check form-switch">
                             
@@ -26,7 +26,7 @@
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                     <p class="mb-4 text-sm mx-auto">
                     Vous n etes deja inscrit ?
-                    <a href="{{ route('index') }}" class="text-primary text-gradient font-weight-bold">Connectez-vous</a>
+                    <a href="{{ route('login') }}" class="text-primary text-gradient font-weight-bold">Connectez-vous</a>
                     </p>
                 </div>
             </div>

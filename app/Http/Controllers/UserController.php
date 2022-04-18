@@ -9,11 +9,17 @@ class UserController extends Controller
 {
     
     public function index(){
-        return view('home');
+        return view('login');
     }
     
     public function register(){
         return view('register');
+    }
+
+    public function singin(Request $request){
+
+        dd('Login succesfully');
+
     }
 
     // Fonction qui récupère un user spécifique
@@ -88,10 +94,10 @@ class UserController extends Controller
     // Fonction qui crée un user en base de données
     public function sign_up(Request $request)
     {
-        //on rée un enregistrement de notre User en BD
+        //on crée un enregistrement de notre User en BD
 
-        dd($request);
-        
+        // dd($request);
+
         User::create([
             'password' => $request->password,
             'cni' => $request->Regis_login,
@@ -111,11 +117,5 @@ class UserController extends Controller
 
     }
 
-    // Fonction qui supprime un user
-    public function login(Request $request){
-
-        return 'Login succesfully';
-
-    }
 
 }

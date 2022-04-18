@@ -4,9 +4,9 @@
             <p class="mb-0 pt-2">Entrer vos information pour vous connecter :</p>
             </div>
                 <div class="card-body">
-                    <form action="{{ route('form') }}" method = "post">
+                    <form action="{{ route('signin') }}" method="post">
                         <div class="mb-3">
-                        <input type="text" class="form-control form-control-lg" name="login" placeholder="CNI/Passport" aria-label="Email">
+                        <input type="text" class="form-control form-control-lg" name="cni_pass" placeholder="CNI/Passport" aria-label="Email">
                         </div>
                         <div class="mb-3">
                         <input type="password" class="form-control form-control-lg" name="password" placeholder="Mot de passe" aria-label="Password">
