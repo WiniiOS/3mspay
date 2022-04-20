@@ -2,9 +2,17 @@
 @section('content')
    
 
-        <p class="mb-0 pt-2">Entrer vos information pour vous inscrire :</p>
+        <p class="mb-0 pt-2">Entrez vos informations pour vous inscrire :</p>
             </div>
                 <div class="card-body">
+
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert"> {{ $error }} </div>
+                        @endforeach
+                    @endif
+
+
                     <form method="post" action="{{ route('signup') }}" >
                         @csrf
                         <div class="mb-3">
@@ -17,13 +25,13 @@
                         <input type="password" class="form-control form-control-lg" name="password" placeholder="Mot de passe" aria-label="Password">
                         </div>
                         <div class="mb-3">
-                        <input type="password" class="form-control form-control-lg" name="re_password" placeholder="Confirmer le mot de passe" aria-label="Password">
+                        <input type="password" class="form-control form-control-lg" name="confirm_password" placeholder="Confirmer le mot de passe" aria-label="Password">
                         </div>
                         <div class="form-check form-switch">
                             
                         </div>
                         <div class="text-center">
-                        <button type="submit" name="save" class="btn btn-lg btn-success btn-lg w-100 mt-4 mb-0">Enregistrer</button>
+                        <button type="submit" name="save" class="btn btn-lg btn-success btn-lg w-100 mt-4 mb-0">Inscription</button>
                         </div>
                     </form>
                 </div>

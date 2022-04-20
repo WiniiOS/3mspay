@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-            <p class="mb-0 pt-2">Entrez vos information pour vous connecter :</p>
+            <p class="mb-0 pt-2">Entrez vos informations pour vous connecter :</p>
             </div>
                 <div class="card-body">
+
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert"> {{ $error }} </div>
+                        @endforeach
+                    @endif
+
                     <form action="{{ route('signin') }}" method="post">
                         @csrf
                         <div class="mb-3">

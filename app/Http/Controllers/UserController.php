@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -18,39 +19,43 @@ class UserController extends Controller
 
     public function singin(Request $request){
 
+        $request->validate([
+            'cni_pass' => ['required','alpha_num','min:8'],
+            'password' => ['required','min:8','max:255',]
+        ]);
+
         //on check si le user existe et on le redirige
         $cni_pass = $request->cni_pass;
         $sha1password = sha1($request->password);
-        
-        // dd($cni_pass);
-        
-        // recupere les données du user
-        // $user = $this->get_cnipass($cni_pass);
 
-        // if (count($user) > 0) {
-        //     if ($user->password == $sha1password) {
-        //         // on crée une variable de session & on connecte l'utilisateur
-        //         return redirect('/Form');
-        //     }
-        // }else{
-        //     return redirect('/');
-        // }
+        // recupere les data du user
+        $user = $this->get_cnipass($cni_pass);
+        
+        // die and dub
+        // dd($user);
 
-        return redirect('/Form');
+        if ($user == null) {
+            return redirect('/')->withErrors(['Ce patient n\'existe pas dans notre Cloud!'])->withInput();
+        }else{
+            if ($user->password == $sha1password) {
+
+                // on crée une variable de session & on connecte l'utilisateur
+                // Session::set('user_id') = $value ;
+                return redirect('/Form');
+
+            }else{
+                return redirect('/')->withErrors(['Le mot de passe ou la CNI/Passeport sont incorrects !'])->withInput();
+            }
+        }
 
     }
 
     // Fonction qui récupère un user spécifique
     public function get_cnipass($cni_pass)
     {
-        $user = User::where('cni','=',$cni_pass)->firstOrFail();
-        // die and dub
-        dd($post);
-
+        $user = DB::table('users')->where('cni',$cni_pass)->orWhere('passeport',$cni_pass)->first();
         return $user;
     }
-
-    
 
     // fonction pour récupèrer tous les users
     public function all_users()
@@ -83,36 +88,46 @@ class UserController extends Controller
     }
 
     // Fonction qui met à jour les données d'un user
-    public function update($id){
+    public function update($id,Request $request){
 
         $user = User::find($id);
         
         $user->update([
-            'id' => $id,
-            'telephone' => 658682586
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'birth_day' => $request->birth_day,
+            'birthplace' => $request->birthplace,
+            'nationality' => $request->nationality,
+            'password' => $request->password,
+            'type_user' => $request->type_user,
+            'telephone' => $request->telephone,
+            'cni' => $request->cni,
+            'passeport' => $request->passeport
         ]);
-        return 'Utilisateur édité avec succès';
+
+        return back()->with('message', 'Utilisateur édité avec succès');
 
     }
 
     // Fonction qui met à jour les données d'un user
-    public function update_user_at_fisrt_payment($id,$telephone,$type_user){
+    public function update_user_at_fisrt_payment( $id , Request $request){
+
+        $id = Session::get('user_id');
 
         $user = User::find($id);
-        // $user = User::where('id', $id )->get();
         
         $user->update([
-            'telephone' => $telephone,
-            'type_user' => $type_user
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'birth_day' => $request->birth_day,
+            'birthplace' => $request->birthplace,
+            'nationality' => $request->nationality,
+            'telephone' => $request->telephone,
+            'email' => $request->email
         ]);
 
-        // $user->toQuery()->update([
-        //     'telephone' => $telephone,
-        //     'type_user' => $type_user
-        // ]);
-
-        dd('Utilisateur édité avec succès');
-
+        return back()->with('message', 'Utilisateur édité avec succès');        
     }
 
     // Fonction qui crée un user en base de données
@@ -140,23 +155,29 @@ class UserController extends Controller
     // Fonction qui crée un user en base de données
     public function sign_up(Request $request)
     {
+
+        $pass1 = $request->password;
+        $pass2 = $request->confirm_password;
+
+        if ($pass1 != $pass2) {
+            return redirect('/Register')->withErrors(['Les mots de passe ne correspondent pas!'])->withInput();
+        }else{
+            $request->validate([
+                'password' => ['required','min:8','max:255',],
+                'confirm_password' => ['required','min:8','max:255',],
+                'cni' => ['unique:users','nullable','alpha_num','min:9','max:20'],
+                'passeport' => ['unique:users','nullable','alpha_num']
+            ]);
+        }
+
         //on crée un enregistrement de notre User en BD
-
-        // dd($request);
-
         User::create([
             'password' => sha1($request->password),
             'cni' => $request->cni,
             'passeport' => $request->passeport
         ]);
 
-        // $message = 'Sign up created succesfully';
-        $result = true;
-
-        if ($result) {
-            return redirect('/');
-        }
-
+        return redirect('/');
     }
 
     // Fonction qui supprime un user

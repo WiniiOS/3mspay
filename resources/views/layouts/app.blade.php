@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,9 @@
     <link href=" assets/css/nucleo-svg.css " rel="stylesheet" />
 
     <link id="pagestyle" href="{{ url('assets/css/argon-dashboard.min790f.css?v=2.0.1') }}" rel="stylesheet" />
-    <title>3MSPay</title>
+
+    <title>3mspay</title>
+
 </head>
 <body>
 
@@ -30,8 +33,8 @@
             @yield('content')
 
                 <span class="mask bg-gradient-success opacity-6"></span>
-                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Bienvenu  sur le 3ms"</h4>
-                <p class="text-white position-relative">Effectuez votre pre-enrolerement de test COVID, en tout securite et aussi en toute confidentialite.</p>
+                <h4 class="mt-5 text-white font-weight-bolder position-relative">Bienvenue sur 3msPay</h4>
+                <p class="text-white position-relative">Effectuez votre pré-enrolerement de test COVID et payez votre ticket de session en toute sécurité et aussi en toute confidentialité.</p>
                 </div>
                 </div>
                 </div>

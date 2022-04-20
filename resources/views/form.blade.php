@@ -13,7 +13,7 @@
     <link href=" assets/css/nucleo-svg.css " rel="stylesheet" />
 
     <link id="pagestyle" href="{{ url('assets/css/argon-dashboard.min790f.css?v=2.0.1') }}" rel="stylesheet" />
-    <title>3MS</title>
+    <title>3mspay</title>
 </head>
 <body class="g-sidenav-show   bg-gray-100">
 
@@ -82,11 +82,16 @@
                                         <input class="multisteps-form__input form-control" type="text" placeholder="ex. Camerounaise" />
                                         </div>
                                         </div>
+
                                         <div class="row mt-3">
-                                        <div class="col">
-                                        <label>Téléphone</label>
-                                        <input class="multisteps-form__input form-control" type="text" placeholder="ex. 655387654" />
-                                        </div>
+                                            <div class="col-md-6">
+                                                <label>Téléphone</label>
+                                                <input class="multisteps-form__input form-control" type="text" placeholder="ex: 655387654" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>E-mail</label>
+                                                <input name='email' class="multisteps-form__input form-control" type="email" placeholder="ex: mon.nom@gmail.com" />
+                                            </div>
                                         </div>
                                        
                                         <div class="button-row d-flex mt-4">
