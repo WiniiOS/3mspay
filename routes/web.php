@@ -21,11 +21,18 @@ Route::post('/', [UserController::class, 'singin'])->name('signin');
 
 Route::get('/Register', [UserController::class, 'register'])->name('register');
 
-Route::get('/Form', [TicketController::class, 'form'])->name('form');
+Route::get('/Form', [UserController::class, 'form'])->name('form');
 
 Route::post('/Register', [UserController::class, 'sign_up'])->name('signup');
 
-Route::post('/Form', [TicketController::class, 'save'])->name('ticket.save');
+Route::post('/Form', [UserController::class, 'update_user'])->name('update.user');
 
 Route::get('/Users', [UserController::class, 'all_users']);
+
+Route::get('/Ticket/Reference', [UserController::class, 'generate_ticket']);
+
+Route::get('Generate', [TicketController::class, 'save']);
+
+Route::get('/Logout', [UserController::class, 'logout']);
+
 

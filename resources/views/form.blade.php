@@ -15,6 +15,7 @@
     <link id="pagestyle" href="{{ url('assets/css/argon-dashboard.min790f.css?v=2.0.1') }}" rel="stylesheet" />
     <title>3mspay</title>
 </head>
+
 <body class="g-sidenav-show   bg-gray-100">
 
 <main class="main-content  mt-0">
@@ -41,30 +42,39 @@
                 
                     <div class="row">
                         <div class="col-12 col-lg-8 m-auto">
-                            <form method='post' action="{{ route('ticket.save') }}" class="multisteps-form__form mb-8"> 
+                            <div class="row">
+                            @if($errors->any())
+                                @foreach($errors->all() as $error)
+                                    <div  class="col-md-4 alert alert-danger" role="alert"> {{ $error }} </div>
+                                @endforeach
+                            @endif
+                            
+                            </div>
+
+                            <form method='post' action="{{ route('update.user') }}" class="multisteps-form__form mb-8"> 
                                 @csrf
                                 <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                     <h5 class="font-weight-bolder mb-0">Informations personelles</h5>
-                                    <p class="mb-0 text-sm">Entrez vos informations</p>
+                                    <p class="mb-0 text-sm">Les champs avec une étoile (<span style='color:red;'>*</span>) sont obligatoires.</p>
                                     <div class="multisteps-form__content">
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
-                                            <label>Nom</label>
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="ex. Michael" />
+                                            <label>Nom <span style='color:red;'>*</span></label>
+                                            <input class="multisteps-form__input form-control" name='firstname' value='{{ $user->firstname }}' type="text" placeholder="ex. Michael" />
                                             </div>
                                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                            <label>Prénom</label>
-                                            <input class="multisteps-form__input form-control" type="text" placeholder="ex. Ange" />
+                                            <label>Prénom <span style='color:red;'>*</span></label>
+                                            <input class="multisteps-form__input form-control" name='lastname' value='{{ $user->lastname }}' type="text" placeholder="ex. Ange" />
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
                                             <label>Date de naissance</label>
-                                            <input class="multisteps-form__input form-control" type="date"/>
+                                            <input name='birth_day' class="multisteps-form__input form-control" value="{{ $user->birth_day != '' ? $user->birth_day : ''   }}" type="date"/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                            <label>Lieu de naissance</label>
-                                            <input class="multisteps-form__input form-control" type="email" placeholder="ex. support@bloosat.com" />
+                                            <label>Lieu de naissance <span style='color:red;'>*</span></label>
+                                            <input class="multisteps-form__input form-control" name='birthplace' value='{{ $user->birthplace }}' type="text" placeholder="ex. Mindourou" />
                                             </div>
                                         </div>
                                         <div class="button-row d-flex mt-4">
@@ -78,19 +88,19 @@
                                     <div class="multisteps-form__content">
                                         <div class="row mt-3">
                                         <div class="col">
-                                        <label>Nationalité </label>
-                                        <input class="multisteps-form__input form-control" type="text" placeholder="ex. Camerounaise" />
+                                        <label>Nationalité <span style='color:red;'>*</span></label>
+                                        <input class="multisteps-form__input form-control" type="text" name='nationality' value='{{ $user->nationality }}' placeholder="ex. Camerounaise" />
                                         </div>
                                         </div>
 
                                         <div class="row mt-3">
                                             <div class="col-md-6">
-                                                <label>Téléphone</label>
-                                                <input class="multisteps-form__input form-control" type="text" placeholder="ex: 655387654" />
+                                                <label>Téléphone <span style='color:red;'>*</span></label>
+                                                <input class="multisteps-form__input form-control" name='telephone' value='{{ $user->telephone }}' type="number" placeholder="ex: 655387654" />
                                             </div>
                                             <div class="col-md-6">
                                                 <label>E-mail</label>
-                                                <input name='email' class="multisteps-form__input form-control" type="email" placeholder="ex: mon.nom@gmail.com" />
+                                                <input name='email' class="multisteps-form__input form-control" value="{{ $user->email != '' ? $user->email : ''   }}" type="email" placeholder="ex: mon.nom@gmail.com" />
                                             </div>
                                         </div>
                                        
@@ -111,21 +121,21 @@
                                     <div class="multisteps-form__content">
                                         <div class="row mt-4">
                                             <div class="col-sm-3 ms-auto">
-                                            <input type="checkbox" class="btn-check" id="btncheck1">
+                                            <input type="checkbox" class="btn-check" name='om' id="btncheck1">
                                             <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck1">
                                             <img src="{{ url('assets/img/Orange-Money-logo.png') }}" width="50px">
                                             </label>
                                             <h6>Orange Money</h6>
                                             </div>
                                             <div class="col-sm-3">
-                                            <input type="checkbox" class="btn-check" id="btncheck2">
+                                            <input type="checkbox" name='momo' class="btn-check" id="btncheck2">
                                             <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck2">
                                                 <img src="{{ url('assets/img/mobile-money-logo.png') }}" width="50px">
                                             </label>
                                             <h6>Mobile Money</h6>
                                             </div>
                                             <div class="col-sm-3 me-auto">
-                                            <input type="checkbox" class="btn-check" id="btncheck3">
+                                            <input disabled type="checkbox" name='credit_card' class="btn-check" id="btncheck3">
                                             <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck3">
                                                 <img src="{{ url('assets/img/MasterCard_Logo.svg.png') }}" width="50px">
                                             </label>
@@ -134,7 +144,7 @@
                                         </div>
                                         <div class="button-row d-flex mt-4">
                                         <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Precedent</button>
-                                        <button class="btn bg-gradient-success ms-auto mb-0 js-btn-send" type="button" title="Send">Terminer</button>
+                                        <button class="btn bg-gradient-success ms-auto mb-0 js-btn-send" type="submit" title="Send">Terminer le paiement</button>
                                         </div>
                                     </div>
                                 </div>

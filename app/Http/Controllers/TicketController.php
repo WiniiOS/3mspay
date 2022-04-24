@@ -7,23 +7,28 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    public function form(){
-        return view('form');
+
+    public function show(Request $request)
+    {
+        return view('ticket');
     }
 
     // Fonction qui crée un nouveau ticket en base de données
-    public function save(Request $request)
-    {
-        //on crée un enregistrement de notre Ticket en BD
+    // public function save(Request $request)
+    // {
+    //     $reference = $this->generateRefcodeNumber();
+    //     $user      = $request->session()->get('user');
+    //     $userId    = $user->id;
 
-        Ticket::create([
-            'reference' => $request->reference,
-            'user_id' => $request->user_id,
-            'status' => $request->status
-        ]);
+    //     //on crée un enregistrement de notre Ticket en BD
+    //     Ticket::create([
+    //         'reference' => $reference,
+    //         'user_id' => $userId,
+    //         'status' => 'unused'
+    //     ]);
 
-        dd('Ticket created succesfully');
-    }
+    //     // return redirect('/Ticket/Reference')->withErrors(['Veuillez lancer le processus de paiement'])->withInput();
+    // }
 
     // fonction pour récupèrer tous les paiements
     public function all()
@@ -34,7 +39,6 @@ class TicketController extends Controller
         return view('payments',[
             'tickets' => $tickets
         ]);
-
     }
 
     public function one($id)
@@ -46,5 +50,18 @@ class TicketController extends Controller
         ]);
 
     }
+
+    // function generateRefcodeNumber(Request $request) {
+
+    //     // Indice
+    //     $reference .= '3MS' ;
+    //     // ID unique basé sur le microtime(56c3096338cdb)
+    //     $reference .= strtoupper(uniqid());
+    //     // ID du user courant
+    //     $user = $request->session()->get('user');
+    //     $reference .= $user->id;
+    
+    //     return $reference;
+    // }
     
 }

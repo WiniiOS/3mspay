@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\TicketController;
 
 class UserController extends Controller
 {
@@ -15,6 +16,19 @@ class UserController extends Controller
     
     public function register(){
         return view('register');
+    }
+
+    public function form(Request $request){
+
+
+        // Si le user est authentifié il peut accéder à la route
+        if ($request->session()->has('user')) {
+            return view('form',[
+                'user' => $request->session()->get('user')
+            ]);
+        }else{
+            return redirect('/')->withErrors(["Veuillez vous authentifier avant de payer un ticket"])->withInput();
+        }
     }
 
     public function singin(Request $request){
@@ -39,8 +53,8 @@ class UserController extends Controller
         }else{
             if ($user->password == $sha1password) {
 
-                // on crée une variable de session & on connecte l'utilisateur
-                // Session::set('user_id') = $value ;
+                // on enregistre sa variable de session
+                $request->session()->put('user', $user);
                 return redirect('/Form');
 
             }else{
@@ -49,6 +63,14 @@ class UserController extends Controller
         }
 
     }
+
+    // public function get_session_user($key)
+    // {
+    //     if ($request->session()->has($key)) {
+    //         $data = $request->session()->get('user');
+    //         return $data;
+    //     }
+    // }
 
     // Fonction qui récupère un user spécifique
     public function get_cnipass($cni_pass)
@@ -91,7 +113,7 @@ class UserController extends Controller
     public function update($id,Request $request){
 
         $user = User::find($id);
-        
+
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -111,13 +133,29 @@ class UserController extends Controller
     }
 
     // Fonction qui met à jour les données d'un user
-    public function update_user_at_fisrt_payment( $id , Request $request){
-
-        $id = Session::get('user_id');
-
-        $user = User::find($id);
+    public function update_user(Request $request){
         
-        $user->update([
+        $date =  date("Y-m-d H:i:s"); 
+
+        // validation formulaire
+        $request->validate([
+            'firstname' => ['required','alpha_num'],
+            'lastname' => ['required','alpha_num'],
+            'birth_day' => ['date','nullable'],
+            'birthplace' => ['required','max:200'],
+            'nationality' => ['required','max:200','nullable'],
+            'telephone' => ['required','numeric'],
+            'email' => ['email','nullable','unique:users']
+        ]);
+
+
+        $user_session = $request->session()->get('user');
+        $id = $user_session->id;
+
+        $cloud_user = User::find($id);
+        
+        // update with eloquent
+        $cloud_user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'birth_day' => $request->birth_day,
@@ -126,8 +164,31 @@ class UserController extends Controller
             'telephone' => $request->telephone,
             'email' => $request->email
         ]);
+        
+        // On génère le ticket
+        $reference = '3MS'.strtoupper(uniqid()).$request->session()->get('user')->id;
+        $userId      = $request->session()->get('user')->id;
 
-        return back()->with('message', 'Utilisateur édité avec succès');        
+        //on crée un enregistrement de notre Ticket en BD
+        DB::table('tickets')->insert([
+            'reference' => $reference,
+            'user_id' => $userId,
+            'status' => 'unused',
+            'created_at' => $date,
+            'updated_at' => $date,
+        ]);
+        // fin generation
+
+        dd('update et generation du user ticket effectué');
+
+        return redirect('/Ticket/Reference/');
+
+    }
+
+    function generateRefcodeNumber(Request $request) {
+
+        $reference = '3MS'.strtoupper(uniqid()).$request->session()->get('user')->id;
+        return $reference;
     }
 
     // Fonction qui crée un user en base de données
@@ -187,6 +248,13 @@ class UserController extends Controller
         $user->delete();
         return 'User deleted succesfully';
 
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('user'); 
+
+        return redirect('/');
     }
 
 }
