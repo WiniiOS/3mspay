@@ -23,6 +23,9 @@ Route::get('/Register', [UserController::class, 'register'])->name('register');
 
 Route::get('/Form', [UserController::class, 'form'])->name('form');
 
+Route::get('/Logout', [UserController::class, 'logout']);
+
+
 Route::post('/Register', [UserController::class, 'sign_up'])->name('signup');
 
 Route::post('/Form', [UserController::class, 'update_user'])->name('update.user');
@@ -33,6 +36,6 @@ Route::get('/Ticket/Reference', [UserController::class, 'generate_ticket']);
 
 Route::get('Generate', [TicketController::class, 'save']);
 
-Route::get('/Logout', [UserController::class, 'logout']);
+
 
 

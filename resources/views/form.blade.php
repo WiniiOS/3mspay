@@ -18,6 +18,49 @@
 
 <body class="g-sidenav-show   bg-gray-100">
 
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-success" id="sidenav-main">
+    <div class="sidenav-header">
+    <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+    <a class="navbar-brand m-0" href="#" target="_blank">
+    <img src="{{ url('assets/img/logo-minsante.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+    <span class="ms-1 font-weight-bold text-white">3MS-PAY</span>
+    </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
+    <ul class="navbar-nav">
+    <li class="nav-item mb-2 mt-0">
+    <a data-bs-toggle="collapse" href="#ProfileNav" class="nav-link text-white" aria-controls="ProfileNav" role="button" aria-expanded="false">
+    <img src="{{ url('assets/img/default.png') }}" class="avatar">
+    <span class="nav-link-text ms-2 ps-1">{{ $user->lastname }} {{$user->firstname}} </span>
+    </a>
+    <div class="collapse" id="ProfileNav" >
+    <ul class="nav ">
+    <li class="nav-item">
+    <a class="nav-link text-white" href="#">
+    <span class="sidenav-mini-icon"> MP </span>
+    <span class="sidenav-normal  ms-3  ps-1"> Profil </span>
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-white " href="#">
+    <span class="sidenav-mini-icon"> P </span>
+    <span class="sidenav-normal  ms-3  ps-1">Parametre </span>
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-white " href="/Logout">
+    <span class="sidenav-mini-icon"> D </span>
+    <span class="sidenav-normal  ms-3  ps-1"> Deconnexion </span>
+    </a>
+    </li>
+    </ul>
+    </div>
+    </li>
+    </ul>
+    </div>
+</aside>
+
 <main class="main-content  mt-0">
     <div class="container-fluid py-4">
         <div class="row mb-5">
@@ -69,7 +112,7 @@
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
-                                            <label>Date de naissance</label>
+                                            <label>Date de naissance {{ $user->firstname }}</label>
                                             <input name='birth_day' class="multisteps-form__input form-control" value="{{ $user->birth_day != '' ? $user->birth_day : ''   }}" type="date"/>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
