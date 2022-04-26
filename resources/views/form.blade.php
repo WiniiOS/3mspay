@@ -34,24 +34,25 @@
     <img src="{{ url('assets/img/default.png') }}" class="avatar">
     <span class="nav-link-text ms-2 ps-1">{{ $user->lastname }} {{$user->firstname}} </span>
     </a>
+    
     <div class="collapse" id="ProfileNav" >
     <ul class="nav ">
     <li class="nav-item">
     <a class="nav-link text-white" href="#">
     <span class="sidenav-mini-icon"> MP </span>
-    <span class="sidenav-normal  ms-3  ps-1"> Profil </span>
+    <span class="sidenav-normal  ms-3  ps-1"> Profile </span>
     </a>
     </li>
     <li class="nav-item">
     <a class="nav-link text-white " href="#">
     <span class="sidenav-mini-icon"> P </span>
-    <span class="sidenav-normal  ms-3  ps-1">Parametre </span>
+    <span class="sidenav-normal  ms-3  ps-1">Parametres </span>
     </a>
     </li>
     <li class="nav-item">
     <a class="nav-link text-white " href="/Logout">
     <span class="sidenav-mini-icon"> D </span>
-    <span class="sidenav-normal  ms-3  ps-1"> Deconnexion </span>
+    <span class="sidenav-normal  ms-3  ps-1"> Déconnexion </span>
     </a>
     </li>
     </ul>
@@ -162,28 +163,32 @@
                                         </div>
                                     </div>
                                     <div class="multisteps-form__content">
-                                        <div class="row mt-4">
+                                        <div class="row mt-4 ">
+
                                             <div class="col-sm-3 ms-auto">
-                                            <input type="checkbox" class="btn-check" name='om' id="btncheck1">
-                                            <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck1">
-                                            <img src="{{ url('assets/img/Orange-Money-logo.png') }}" width="50px">
-                                            </label>
-                                            <h6>Orange Money</h6>
+                                                <input type="checkbox" class="btn-check" name='om' id="btncheck1">
+                                                <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck1">
+                                                <img src="{{ url('assets/img/Orange-Money-logo.png') }}" width="50px">
+                                                </label>
+                                                <h6>Orange Money</h6>
                                             </div>
+
                                             <div class="col-sm-3">
-                                            <input type="checkbox" name='momo' class="btn-check" id="btncheck2">
-                                            <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck2">
-                                                <img src="{{ url('assets/img/mobile-money-logo.png') }}" width="50px">
-                                            </label>
-                                            <h6>Mobile Money</h6>
+                                                <input type="checkbox" name='momo' class="btn-check" id="btncheck2">
+                                                <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck2">
+                                                    <img src="{{ url('assets/img/mobile-money-logo.png') }}" width="50px">
+                                                </label>
+                                                <h6>Mobile Money</h6>
                                             </div>
+
                                             <div class="col-sm-3 me-auto">
-                                            <input disabled type="checkbox" name='credit_card' class="btn-check" id="btncheck3">
-                                            <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck3">
-                                                <img src="{{ url('assets/img/MasterCard_Logo.svg.png') }}" width="50px">
-                                            </label>
-                                            <h6>MasterCard</h6>
+                                                <input disabled type="checkbox" name='credit_card' class="btn-check" id="btncheck3">
+                                                <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck3">
+                                                    <img src="{{ url('assets/img/MasterCard_Logo.svg.png') }}" width="50px">
+                                                </label>
+                                                <h6>MasterCard</h6>
                                             </div>
+
                                         </div>
                                         <div class="button-row d-flex mt-4">
                                         <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Precedent</button>

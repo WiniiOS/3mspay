@@ -13,6 +13,27 @@ class UserController extends Controller
     public function index(){
         return view('login');
     }
+
+    public function show_hidden($reference,Request $request)
+    {
+        // dd($reference);
+
+        $ticket = DB::table('tickets')->where('reference',$reference)->first();
+        
+        // dd($ticket);
+
+        $user = $request->session()->get('user');
+
+        // dd($user);
+
+        // dd($ticket);
+
+        return view('ticket',[
+            'ticket' => $ticket,
+            'user' => $user
+        ]);
+
+    }
     
     public function register(){
         return view('register');
@@ -63,14 +84,6 @@ class UserController extends Controller
         }
 
     }
-
-    // public function get_session_user($key)
-    // {
-    //     if ($request->session()->has($key)) {
-    //         $data = $request->session()->get('user');
-    //         return $data;
-    //     }
-    // }
 
     // Fonction qui récupère un user spécifique
     public function get_cnipass($cni_pass)
@@ -134,20 +147,28 @@ class UserController extends Controller
 
     // Fonction qui met à jour les données d'un user
     public function update_user(Request $request){
+
+        // dd($request->om ,$request->momo) ;
+        // if ($request->momo != null) {
+        //     // on enregistre sa variable de session
+        //     $request->session()->put('operator', $request->momo);
+        // }elseif ($request->om) {
+        //     // on enregistre sa variable de session
+        //     $request->session()->put('user', $request->om);
+        // }
         
         $date =  date("Y-m-d H:i:s"); 
 
         // validation formulaire
         $request->validate([
-            'firstname' => ['required','alpha_num'],
-            'lastname' => ['required','alpha_num'],
+            'firstname' => ['required'],
+            'lastname' => ['required'],
             'birth_day' => ['date','nullable'],
             'birthplace' => ['required','max:200'],
             'nationality' => ['required','max:200','nullable'],
             'telephone' => ['required','numeric'],
-            'email' => ['email','nullable','unique:users']
+            'email' => ['email','nullable'],
         ]);
-
 
         $user_session = $request->session()->get('user');
         $id = $user_session->id;
@@ -179,9 +200,9 @@ class UserController extends Controller
         ]);
         // fin generation
 
-        dd('update et generation du user ticket effectué');
-
-        return redirect('/Ticket/Reference/');
+        // dd('update et generation du user ticket effectué');
+        $route = '/Ticket/'.$reference;
+        return redirect($route);
 
     }
 

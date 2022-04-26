@@ -17,14 +17,15 @@ use App\Http\Controllers\TicketController;
 
 Route::get('/', [UserController::class, 'index'])->name('login');
 
-Route::post('/', [UserController::class, 'singin'])->name('signin');
-
 Route::get('/Register', [UserController::class, 'register'])->name('register');
 
 Route::get('/Form', [UserController::class, 'form'])->name('form');
 
 Route::get('/Logout', [UserController::class, 'logout']);
 
+Route::get('/Ticket/{reference}' , [UserController::class,"show_hidden"])->name('show_hidden');
+
+Route::post('/', [UserController::class, 'singin'])->name('signin');
 
 Route::post('/Register', [UserController::class, 'sign_up'])->name('signup');
 
@@ -32,10 +33,7 @@ Route::post('/Form', [UserController::class, 'update_user'])->name('update.user'
 
 Route::get('/Users', [UserController::class, 'all_users']);
 
-Route::get('/Ticket/Reference', [UserController::class, 'generate_ticket']);
-
-Route::get('Generate', [TicketController::class, 'save']);
-
+Route::post('/Pay', [PaymentController::class,"pay"])->name('pay');
 
 
 
