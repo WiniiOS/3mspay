@@ -45,69 +45,59 @@ class PaymentController extends Controller
 
     }
 
-    // Fonction qui génère un token Adwapay
-    public function get_token(){
+    public function token()
+    {        
+        $url = 'https://twsv03.adwapay.cm/getADPToken';
+
+        $app_code = 'AP3HFKUAVBXXCYRYZ';
 
         $username = 'BLOO1';
-        $pass = 'BL3HFKUAVBXXO1';
-        $url = 'https://twsv03.adwapay.cm/getADPToken';
-        
-        $curl = curl_init($url);
-      
-        $headers = array(
-           "Authorization: Basic QkxPTzE6QkwzSEZLVUFWQlhYTzE=$username:$pass",
-           "Content-Type:application/json",
-           "Accept: application/json"
-        );
 
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $password = 'BL3HFKUAVBXXO1';
 
-        echo $response;
-        $result = json_decode($response);
-        return $result->tokenCode;
-      
+        $response = Http::withBasicAuth($username, $password)->post($url, [
+            'application' => $app_code
+        ]);
+
+        $data = $response->json();
+
+        return $data['data']['tokenCode'];
     }
 
-    function ticket_pay($operator,$telephone,$transaction_no){
+    public function pay()
+    {        
+        $url = 'https://twsv03.adwapay.cm/requestToPay';
 
-        $token = $this->get_token();
-        $curl = curl_init();
-        
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://twsv03.adwapay.cm/requestToPay',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_POSTFIELDS =>'{
-          "meanCode": '.$operator.',
-          "paymentNumber": '.$telephone.',
-          "orderNumber": '.$transaction_no.',
-          "amount": 30000,
-          "currency": "XAF",
-          "feesAmount": "30"
-        }
-        ',
-          CURLOPT_HTTPHEADER => array(
-            'AUTH-API-TOKEN: '.$token.'',
-            'AUTH-API-SUBSCRIPTION: BL3HFKUAVBXXO1',
-            'Content-Type: text/plain'
-          ),
-        ));
-        
-        $response = curl_exec($curl);
-        
-        curl_close($curl);
-        echo $response;
-        
-        $result = json_decode($response);
-        return $result;
-       
-  }
+        $token = $this->token();
+
+        $subscription_key = 'BL3HFKUAVBXXO1';
+
+        $operator = "ORANGE-MONEY";
+
+        $number = '658682586';
+
+        $order_ref = '3MS'.strtoupper(uniqid());
+
+        $amount = 10;
+
+        $feesAmount = '70';
+
+        $response = Http::withHeaders([
+            'AUTH-API-TOKEN' => $token,
+            'AUTH-API-SUBSCRIPTION' => $subscription_key
+        ])->post($url, [
+            "meanCode" => $operator,
+            "paymentNumber" => $number, 
+            "orderNumber" => $order_ref,
+            "amount" => $amount,
+            "currency" => "XAF",
+            "feesAmount" => $feesAmount
+        ]);
+
+        $data = $response->json();
+
+        // dd($data);
+        return $data;
+    }
 
 }

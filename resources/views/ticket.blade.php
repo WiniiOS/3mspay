@@ -72,7 +72,7 @@
   <div class="card-header text-center">
   <div class="row justify-content-between">
   <div class="col-md-4 text-start">
-  <img class="mb-2 w-25 p-2" src="{{ url('assets/img/logo-minsante.png') }}" width="100px" height="100px" >
+  <img class="mb-2 w-50 p-2" src="{{ url('assets/img/logo-minsante.png') }}"  >
   <h6>
   3MS-MINSANTE, CAMEROUN
   </h6>
