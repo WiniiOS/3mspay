@@ -33,7 +33,7 @@ Route::post('/Form', [UserController::class, 'update_user'])->name('update.user'
 
 Route::get('/Users', [UserController::class, 'all_users']);
 
-Route::post('/Pay', [PaymentController::class,"pay"])->name('pay');
+Route::post('/Pay', [UserController::class,"pay"])->name('pay');
 
 
 

@@ -39,7 +39,7 @@
     <li class="nav-item">
     <a class="nav-link text-white" href="#">
     <span class="sidenav-mini-icon"> MP </span>
-    <span class="sidenav-normal  ms-3  ps-1"> Profil </span>
+    <span class="sidenav-normal  ms-3  ps-1"> Profile </span>
     </a>
     </li>
     <li class="nav-item">
@@ -66,6 +66,7 @@
 <div class="container-fluid my-3 py-3">
 <div class="row">
 <div class="col-md-10 col-lg-8 col-sm-10 mx-auto">
+  
 <form action="{{ route('pay') }}" method="post">
   @csrf
   <div class="card my-sm-5">
@@ -146,7 +147,7 @@
   </tfoot>
   </table>
     <div class="col-lg-7 text-md-end mt-md-0 mt-3">
-      <button class="btn bg-gradient-success mt-lg-7 mb-0" type="button" name="button">Payer</button>
+      <button class="btn bg-gradient-success mt-lg-7 mb-0" type="submit" name="button">Payer</button>
     </div>
   </div>
   </div>

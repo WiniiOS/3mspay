@@ -139,7 +139,7 @@
 
                                         <div class="row mt-3">
                                             <div class="col-md-6">
-                                                <label>Téléphone <span style='color:red;'>*</span></label>
+                                                <label>Téléphone Mobile money<span style='color:red;'>*</span></label>
                                                 <input class="multisteps-form__input form-control" name='telephone' value='{{ $user->telephone }}' type="number" placeholder="ex: 655387654" />
                                             </div>
                                             <div class="col-md-6">
