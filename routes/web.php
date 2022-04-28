@@ -37,3 +37,5 @@ Route::post('/Pay', [UserController::class,"pay"])->name('pay');
 
 
 
+Route::get('/Pdf', [UserController::class, 'ticket_pdf'])->name('ticket');
+

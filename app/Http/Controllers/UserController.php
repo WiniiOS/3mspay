@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\TicketController;
+use Dompdf\Dompdf;
 
 class UserController extends Controller
 {
@@ -56,8 +57,8 @@ class UserController extends Controller
     public function singin(Request $request){
 
         $request->validate([
-            'cni_pass' => ['required','alpha_num','min:8'],
-            'password' => ['required','min:8','max:255',]
+            'cni_pass' => ['required'],
+            'password' => ['required','min:4']
         ]);
 
         //on check si le user existe et on le redirige
@@ -201,8 +202,17 @@ class UserController extends Controller
         ]);
         // fin generation
 
+        $cloud_user_updated = User::find($id);
+
+        // On delete l'ancienne session user
+        $request->session()->forget('user');
+        // on enregistre sa variable de session
+        $request->session()->put('user', $cloud_user_updated);
+
         // dd('update et generation du user ticket effectué');
         $route = '/Ticket/'.$reference;
+
+
         return redirect($route);
 
     }
@@ -246,10 +256,10 @@ class UserController extends Controller
             return redirect('/Register')->withErrors(['Les mots de passe ne correspondent pas!'])->withInput();
         }else{
             $request->validate([
-                'password' => ['required','min:8','max:255',],
-                'confirm_password' => ['required','min:8','max:255',],
-                'cni' => ['unique:users','nullable','alpha_num','min:9','max:20'],
-                'passeport' => ['unique:users','nullable','alpha_num']
+                'password' => ['required','min:4'],
+                'confirm_password' => ['required','min:4'],
+                'cni' => ['unique:users','nullable'],
+                'passeport' => ['unique:users','nullable']
             ]);
         }
 
@@ -331,8 +341,10 @@ class UserController extends Controller
 
         $data = $response->json()['data'];
 
-        dd($data);
-        // return $data;
+        // dd($data);
+        return view('payment',[
+            'data' => $data
+        ]);
     }
 
     // Déclencher le SSD sur le terminal du patient pour payer
@@ -415,6 +427,28 @@ class UserController extends Controller
         ]);
 
         return $response->json();
+    }
+
+    public function ticket_pdf()
+    {
+        $dompdf = new Dompdf();
+
+        $data = [
+            'nationality' => 'Camerounaise',
+            'firstname' => 'Franck',
+            'lastname' => 'Ndi'
+        ];
+
+        $dompdf->loadHtml(view('pdf',[
+            'data' => $data
+        ]));
+
+        $dompdf->setPaper('A6','helvetica');
+
+        $dompdf->render();
+
+        $dompdf->stream('ticketname.pdf',array('Attachment' => false));
+
     }
 
 }
